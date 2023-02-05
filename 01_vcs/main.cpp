@@ -1,17 +1,13 @@
-#include <iostream>
-#include <string>
-#include <vector>
-
 #include "src/cli.h"
 
 int main(int argc, char* argv[]) {
   if (argc < 2) {
-    std::cerr << "Error: missing command" << std::endl;
+    cerr << "Error: missing command" << endl;
     return 1;
   }
 
-  std::string command = argv[1];
-  std::vector<std::string> args(argv + 2, argv + argc);
+  string command = argv[1];
+  vector<string> args(argv + 2, argv + argc);
 
   if (command == "init") {
     handle_init_command(args);
@@ -21,8 +17,9 @@ int main(int argc, char* argv[]) {
     handle_diff_command(args);
   } else if (command == "log") {
     handle_log_command(args);
-  } else {
-    std::cerr << "Error: unknown command: " << command << std::endl;
+  } else 
+  {
+    cerr << "Error: unknown command: " << command << endl;
     return 1;
   }
 
