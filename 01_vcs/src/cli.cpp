@@ -43,3 +43,13 @@ bool handle_log_command(const vector<string>& args) {
   vcs_log();
   return true;
 }
+
+bool handle_status_command(const vector<string>& args) {
+  if (!args.empty()) {
+    cerr << "Error: status command does not take any arguments." << endl;
+    return false;
+  }
+
+  vcs_status();
+  return true;
+}

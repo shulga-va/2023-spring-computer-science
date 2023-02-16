@@ -94,3 +94,37 @@ bool vcs_log() {
 
   return true;
 }
+
+bool vcs_status() {
+int latest_snapshot_id = get_next_snapshot_id() - 1;
+string latest_snapshot_dir = ".archive/snapshot_" + to_string(latest_snapshot_id);
+
+auto commit_log_file_path = fs::path(latest_snapshot_dir) / string("commit.log");
+ifstream commit_log_file(commit_log_file_path);
+if (!commit_log_file.good()) {
+return false;
+}
+string commit_message;
+getline(commit_log_file, commit_message);
+cout << "Latest commit: " << commit_message << endl;
+commit_log_file.close();
+
+auto hashes_log_file_path = fs::path(latest_snapshot_dir) / string("hashes.log");
+ifstream hashes_log_file(hashes_log_file_path);
+if (!hashes_log_file.good()) {
+return false;
+}
+unordered_map<string, string> file_hashes;
+string file_path, file_hash;
+while (hashes_log_file >> file_path >> file_hash) {
+file_hashes[file_path] = file_hash;
+}
+
+cout << "File hashes:" << endl;
+for (const auto &[file, hash] : file_hashes) {
+cout << file << ": " << hash << endl;
+}
+hashes_log_file.close();
+
+return true;
+}

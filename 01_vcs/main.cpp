@@ -17,6 +17,8 @@ int main(int argc, char* argv[]) {
     handle_diff_command(args);
   } else if (command == "log") {
     handle_log_command(args);
+  } else if (command == "status") {
+    handle_status_command(args); 
   } else 
   {
     cerr << "Error: unknown command: " << command << endl;
