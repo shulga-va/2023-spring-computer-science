@@ -3,6 +3,7 @@
 
 #include "vcs.h"
 
+void print_help();
 bool handle_init_command(const vector<string>& args);
 bool handle_commit_command(const vector<string>& args);
 bool handle_diff_command(const vector<string>& args);

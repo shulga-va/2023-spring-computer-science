@@ -7,14 +7,18 @@ int main(int argc, char* argv[]) {
   }
 
   string command = argv[1];
+  
+  if (command == "-h") {
+    print_help();
+    return 0;
+  } 
+
   vector<string> args(argv + 2, argv + argc);
 
   if (command == "init") {
     handle_init_command(args);
   } else if (command == "commit") {
     handle_commit_command(args);
-  } else if (command == "diff") {
-    handle_diff_command(args);
   } else if (command == "log") {
     handle_log_command(args);
   } else if (command == "status") {
