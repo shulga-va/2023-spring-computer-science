@@ -7,7 +7,10 @@ void print_help() {
   cout << "  commit [message]    Save changes to the repository\n";
   cout << "  log                 Show the commit history\n";
   cout << "  status              Show the current status of the repository\n";
+<<<<<<< HEAD
   cout << "  tag [tag name]      Assign the tag for this snapshot\n";
+=======
+>>>>>>> df395a9a9458c4bddd6cd3ec0278e392fa503aff
 }
 
 bool handle_init_command(const vector<string>& args) {

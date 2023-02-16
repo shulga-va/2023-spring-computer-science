@@ -19,8 +19,6 @@ int main(int argc, char* argv[]) {
     handle_init_command(args);
   } else if (command == "commit") {
     handle_commit_command(args);
-  } else if (command == "diff") {
-    handle_diff_command(args);
   } else if (command == "log") {
     handle_log_command(args);
   } else if (command == "status") {
