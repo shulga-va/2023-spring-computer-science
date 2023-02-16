@@ -128,3 +128,18 @@ hashes_log_file.close();
 
 return true;
 }
+
+bool vcs_tag(const string& tag_name) {
+  int latest_snapshot_id = get_next_snapshot_id() - 1;
+  string latest_snapshot_dir = ".archive/snapshot_" + to_string(latest_snapshot_id);
+  auto tag_file_path = fs::path(latest_snapshot_dir) / string(tag_name + ".tag");
+  if (fs::exists(tag_file_path)) {
+    cout << "Tag with name " << tag_name << " already exists." << endl;
+    return false;
+  }
+  ofstream tag_file(tag_file_path);
+  tag_file << latest_snapshot_id << endl;
+  tag_file.close();
+  cout << "Tag " << tag_name << " created for snapshot " << latest_snapshot_id << endl;
+  return true;
+}

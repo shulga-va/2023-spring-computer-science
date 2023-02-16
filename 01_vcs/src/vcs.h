@@ -22,6 +22,7 @@ bool vcs_init();
 bool vcs_commit(const string &message);
 bool vcs_log();
 bool vcs_status();
+bool vcs_tag(const string& tag_name);
 
 unordered_map<string, string> create_snapshot();
 

@@ -7,6 +7,12 @@ int main(int argc, char* argv[]) {
   }
 
   string command = argv[1];
+  
+  if (command == "-h") {
+    print_help();
+    return 0;
+  } 
+
   vector<string> args(argv + 2, argv + argc);
 
   if (command == "init") {
@@ -18,8 +24,10 @@ int main(int argc, char* argv[]) {
   } else if (command == "log") {
     handle_log_command(args);
   } else if (command == "status") {
-    handle_status_command(args); 
-  } else 
+    handle_status_command(args);
+  } else if (command == "tag") {
+    handle_tag_command(args);
+  } else
   {
     cerr << "Error: unknown command: " << command << endl;
     return 1;
