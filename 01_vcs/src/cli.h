@@ -10,5 +10,6 @@ bool handle_diff_command(const vector<string>& args);
 bool handle_log_command(const vector<string>& args);
 bool handle_status_command(const vector<string>& args);
 bool handle_tag_command(const vector<string>& args);
+bool handle_rollback_command(const vector<string>& args);
 
 #endif

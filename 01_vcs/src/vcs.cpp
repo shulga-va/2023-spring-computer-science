@@ -143,3 +143,35 @@ bool vcs_tag(const string& tag_name) {
   cout << "Tag " << tag_name << " created for snapshot " << latest_snapshot_id << endl;
   return true;
 }
+
+bool vcs_rollback(int snapshot_id) {
+    string snapshot_dir = ".archive/snapshot_" + to_string(snapshot_id);
+    if (!fs::exists(snapshot_dir) || !fs::is_directory(snapshot_dir)) {
+        cerr << "Error: snapshot " << snapshot_id << " does not exist." << endl;
+        return false;
+    }
+
+    fs::path curr_dir = fs::current_path();
+    fs::directory_iterator end_iter;
+    for (fs::directory_iterator dir_iter(curr_dir); dir_iter != end_iter; ++dir_iter) {
+        if (dir_iter->path().filename() != "vcs" && dir_iter->path().filename() != ".archive") {
+            fs::remove_all(dir_iter->path());
+        }
+    }
+
+    for (const auto &entry : fs::directory_iterator(snapshot_dir)) {
+      if (entry.path().filename() != "vcs") {
+        if (fs::is_directory(entry)) {
+            fs::create_directory(entry.path().filename());
+        } else {
+            copy_from_to(entry.path(), "./" + entry.path().filename().string());
+          }
+      }
+}
+
+    cout << "Rolled back to snapshot " << snapshot_id << endl;
+
+    fs::current_path(curr_dir);
+
+    return true;
+}

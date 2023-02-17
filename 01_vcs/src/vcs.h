@@ -23,6 +23,7 @@ bool vcs_commit(const string &message);
 bool vcs_log();
 bool vcs_status();
 bool vcs_tag(const string& tag_name);
+bool vcs_rollback(int snapshot_id);
 
 unordered_map<string, string> create_snapshot();
 
